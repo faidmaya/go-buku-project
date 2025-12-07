@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -11,18 +12,31 @@ import (
 )
 
 func main() {
-	// load env from .env if present
+	// Load environment variables dari .env
 	if err := godotenv.Load(); err != nil {
 		log.Println("No .env file loaded; relying on environment variables")
 	}
+
+	// Debug: cek env variable
+	fmt.Println("DB_HOST:", os.Getenv("DB_HOST"))
+	fmt.Println("DB_PORT:", os.Getenv("DB_PORT"))
+	fmt.Println("DB_SSLMODE:", os.Getenv("DB_SSLMODE"))
+
+	// Connect ke database Railway
 	database.Connect()
 
-	useJWT := true // set false to use Basic Auth instead
+	// Gunakan JWT untuk autentikasi
+	useJWT := true // set false untuk Basic Auth
 
+	// Setup router Gin
 	r := routers.SetupRouter(useJWT)
+
+	// Ambil port dari environment variable
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "8080" // default 8080
 	}
+
+	log.Println("Server running on port:", port)
 	r.Run(":" + port)
 }

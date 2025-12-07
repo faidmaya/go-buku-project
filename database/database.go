@@ -5,20 +5,42 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 var DB *sql.DB
 
 func Connect() {
+	// Load .env
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file loaded; relying on environment variables")
+	}
+
 	host := os.Getenv("DB_HOST")
-	port := os.Getenv("DB_PORT")
+	portStr := os.Getenv("DB_PORT")
 	user := os.Getenv("DB_USER")
 	pass := os.Getenv("DB_PASSWORD")
 	name := os.Getenv("DB_NAME")
+	ssl := os.Getenv("DB_SSLMODE")
 
-	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, pass, name)
+	if ssl == "" {
+		ssl = "require"
+	}
+
+	// Convert port ke int
+	port, err := strconv.Atoi(portStr)
+	if err != nil {
+		log.Fatalf("Invalid DB_PORT: %v", err)
+	}
+
+	// Build DSN
+	dsn := fmt.Sprintf(
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
+		host, port, user, pass, name, ssl,
+	)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
@@ -29,5 +51,6 @@ func Connect() {
 		log.Fatalf("database ping error: %v", err)
 	}
 
+	log.Println("Successfully connected to the database!")
 	DB = db
 }
