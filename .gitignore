@@ -1,0 +1,17 @@
+# Go build
+/bin/
+/obj/
+
+# Vendor
+/vendor/
+
+# OS files
+.DS_Store
+
+# Env file
+.env
+
+# IDE/editor files
+*.swp
+*.idea/
+*.vscode/
