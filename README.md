@@ -118,6 +118,8 @@ Response:
 | GET    | /api/categories/:id | Menampilkan detail kategori | 
 | DELETE | /api/categories/:id | Menghapus kategori | 
 | GET    | /api/categories/:id/books | Menampilkan buku berdasarkan kategori | 
+| PUT    | /api/categories/:id | Mengupdate kategori | 
+
 ---
 
 ### Buku
@@ -126,6 +128,7 @@ Response:
 |--------|------|-----------|
 | GET    | /api/books | Menampilkan semua buku |
 | POST   | /api/books | Menambahkan buku baru | 
+| PUT    | /api/books/:id | Mengaupdate buku |
 | GET    | /api/books/:id | Menampilkan detail buku |
 | DELETE | /api/books/:id | Menghapus buku |
 
@@ -177,6 +180,8 @@ go run main.go
 | POST   | /api/categories | Menambahkan kategori baru | Protected |
 | DELETE | /api/categories/:id | Menghapus kategori | Protected |
 | POST   | /api/books | Menambahkan buku baru | Protected |
+| PUT   | /api/categories/:id | Mengupdate Kategori | Protected |
+| PUT   | /api/books/:id | Mengupdate Buku | Protected |
 | DELETE | /api/books/:id | Menghapus buku | Protected |
 
 💡 Keterangan:
