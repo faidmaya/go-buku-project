@@ -192,23 +192,5 @@ Protected: harus menyertakan JWT token atau Basic Auth di header:
 
 Authorization: Bearer <token>
 
-### Contoh Screenshot Postman
-
-**Login**
-![Login Postman](assets/login.png)
-
-**GET**
-![GET Categories](assets/get-categories.png)
-![GET Books](assets/get-book.png)
-![GET Update](assets/get-update.png)
-
-**POST Buku Baru**
-![Post Categories](assets/post-categories.png)
-![POST Book](assets/post-book.png)
-
-**PUT Buku**
-![PUT Categories](assets/put-categories.png)
-![PUT Book](assets/put-book.png)
-
-**DELETE Buku Baru**
-![DELETE](assets/delete.png)
+### Screenshot Postman 
+go-book-project/assets
